@@ -2,11 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import {BsCheck} from "react-icons/bs"
 const Todo = (props:any) => {
-  const { todoapp ,handleupdate} = props;
+  const { todoapp ,handleupdate,darkmode} = props;
 
-  const [isdone,setIsdone]=useState(todoapp.isDone)
-
-  console.log(todoapp.isDone);
+  const [isdone,setIsdone]=useState(todoapp.isDone);
   
 
   const handleclick = (id:string) =>{
@@ -35,7 +33,7 @@ const Todo = (props:any) => {
      )
 
      }
-    <h1 className={`${!isdone? "text-white":"line-through text-brightGray"} `} > {todoapp.description} </h1>
+    <h1 className={`${!isdone? "text-white":"line-through text-brightGray"} ${!darkmode&&' bg-brightGray text-black '}  `}  > {todoapp.description} </h1>
     </div>
     <hr className='text-brightGray h-1'/>
 
