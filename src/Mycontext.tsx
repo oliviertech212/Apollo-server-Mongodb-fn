@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState,useEffect } from "react";
 
 
 export const MyContext=createContext(
@@ -10,14 +10,25 @@ type DarkModeProviderProps = {
   };
 
 function DarkModeProvider(props:DarkModeProviderProps){
-    const [darkmode,setDarkmode]=useState(false);
+    const mode =localStorage.getItem("mode")
+    const [darkmode,setDarkmode]=useState(mode==="true");
 
     const toggleDarkMode=() => {
-        setDarkmode(!darkmode);
+        localStorage.setItem('mode',"true")
+        setDarkmode(true);
     }
     const toggleLightMode=() => {
-        setDarkmode(darkmode);
+        localStorage.setItem('mode',"false")
+        setDarkmode(false);
     }
+
+    useEffect(() => {
+        const mode =localStorage.getItem("mode")
+        
+        if(mode!==null){
+            setDarkmode(mode=='true');
+        }
+    },[])
 
     return(
         <>

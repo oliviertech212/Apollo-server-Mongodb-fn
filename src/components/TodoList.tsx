@@ -76,6 +76,10 @@ const TodoList = () => {
   }
   
 
+  const handleToggle = () => {
+    darkmode ? toggleLightMode() : toggleDarkMode();
+  };
+
 
   const [newTodo,setNewTodo]=useState('');
   const [clicked,setClicked]=useState(false);
@@ -168,40 +172,41 @@ const TodoList = () => {
 
       </div>
       <div className='h-4/5 w-2/4 absolute top-10 flex flex-col justify-between '>
-      <div className='h-10 flex  justify-between '>
-        <h1 className={`text-white text-4xl font-middle ${ !darkmode&& 'text-black'} `}>TODO</h1>
+      <div className='h-10 flex  justify-between mb-5 '>
+        <h1 className={` text-4xl font-bold text-white `}>TODO</h1>
         
-        {darkmode?
-        <span className='text-white text-xl '>
-        <BsSun size={30} onClick={handleclick} />   
-      </span>:
-      <span className='text-black text-xl '>
-        <BsMoon size={30} onClick={handleLightmode} />  
+
+    <span
+      className={`w-10 h-10 rounded-full flex items-center justify-center ${
+        darkmode ? " text-white bg-black" : " text-black bg-white"
+      }`}
+      onClick={handleToggle}
+    >
+      {darkmode ? <BsSun size={30} /> : <BsMoon size={30} />}
     </span>
-        }
         
        
-      </div>
+  </div>
       <div className=' h-[95%]'>
-         <div className={` bg-black1 ${!darkmode&& 'bg-brightGray text-black'}   border-3 h-16 mb-3`} >
+         <div className={` bg-black1 ${!darkmode&& 'bg-gray text-black1'}   border-3 h-16 mb-3`} >
          <form action="" className=' h-full px-3 flex items-center' onSubmit={handleAddTodo}>
           {clicked ?
 
-            (<button className={`w-5 h-5  rounded-full border  border-brightGray ${!darkmode && 'border-black text-black'} mr-3 flex items-center justify-center text-white `} > 
+            (<button className={`w-5 h-5  rounded-full border  border-brightGray ${!darkmode && 'border-black1 text-black1'} mr-3 flex items-center justify-center text-white `} > 
              <BsCheck />
            </button>):
-            (<button type="submit" className={`w-5 h-5 cursor-progress   rounded-full border border-brightGray mr-3 `} />)
+            (<button type="submit" className={`w-5 h-5 cursor-progress ${!darkmode && 'border-black1 text-black1'}   rounded-full border border-brightGray mr-3 `} />)
           }
           <input 
           type="text"
-          className='w-[95%] bg-black1  '
+          className={`w-[95%] bg-black1 ${!darkmode && 'bg-white' }  `}
           placeholder='Create a new todo ' 
           value={newTodo}
           onChange={(e) =>setNewTodo(e.target.value)}
           />
         </form>
          </div>
-        <div className={`bg-black1 ${!darkmode&&' bg-brightGray text-black '}  h-[85%] mb-0  scr scroll-content`}>
+        <div className={`bg-black1 ${!darkmode&&' bg-gray text-black '}  h-[85%] mb-0  scr scroll-content`}>
          
         <div>
           {selectedtab==='all'&&(
@@ -247,12 +252,12 @@ const TodoList = () => {
 
          </div>
 
-         <div className={` bg-black1 border-3 h-16 px-3 fixed flex justify-between ${!darkmode && 'border-black text-black bg-brightGray'}   w-2/4  ` }>
+         <div className={` bg-black1 border-3 h-16 px-3 fixed flex justify-between ${!darkmode && 'border-black text-black bg-brightGray  bg-gray'}   w-2/4  ` }>
 
-          <h1 className={`${!darkmode&&' text-black'} text-brightGray`}> {notcompleted} items left</h1>
-          <h1 className={`text-brightGray ${!darkmode&&' text-black'} cursor-pointer ${selectedtab==='all'&&('font-bold text-white underline')}`} onClick={()=>setSelectedtab('all')} >All</h1>
-          <h1 className={`text-brightGray ${!darkmode&&' text-black'}  cursor-pointer ${selectedtab==='active'&&'font-bold text-white underline '}`} onClick={()=>setSelectedtab('active')}>Active</h1>
-          <h1 className={`text-brightGray ${!darkmode&&' text-black'}  cursor-pointer ${selectedtab==='complete'&&'font-bold text-white underline '}`} onClick={()=>setSelectedtab('complete')}>Completed</h1>
+          <h1 className={`${!darkmode&&' text-black1'} text-brightGray`}> {notcompleted} items left</h1>
+          <h1 className={`text-brightGray ${!darkmode&&' text-black1'} cursor-pointer ${selectedtab==='all'&&('font-bold text-white underline')}`} onClick={()=>setSelectedtab('all')} >All</h1>
+          <h1 className={`text-brightGray ${!darkmode&&' text-black1'}  cursor-pointer ${selectedtab==='active'&&'font-bold text-white underline '}`} onClick={()=>setSelectedtab('active')}>Active</h1>
+          <h1 className={`text-brightGray ${!darkmode&&' text-black1'}  cursor-pointer ${selectedtab==='complete'&&'font-bold text-white underline '}`} onClick={()=>setSelectedtab('complete')}>Completed</h1>
 
          </div>
        
